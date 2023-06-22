@@ -30,7 +30,8 @@ trait getInstance{
         }
     }
     spl_autoload_register("autoload");
-
-    countries::getInstance(json_decode(file_get_contents("php://input"), true))->countryDelete(6);
-
+    /* countries::getInstance(json_decode(file_get_contents("php://input"), true))->countryPost();
+    regions::getInstance(json_decode(file_get_contents("php://input"), true))->regionsPost();
+    cities::getInstance(json_decode(file_get_contents("php://input"), true))->citiesPost(); */
+    areas::getInstance(json_decode(file_get_contents("php://input"), true))->areasGet();
 ?>
