@@ -11,7 +11,7 @@ class regions extends connect{
 
     public function regionsPost(){
         try {
-            $res = $this->conex->prepare($this->queryPost);
+            $res = $this->__get("conex")->prepare($this->queryPost);
             $res->bindValue("name", $this->name_region);
             $res->bindValue("id", $this->id_country);
             $res->execute();
@@ -26,7 +26,7 @@ class regions extends connect{
 
     public function regionsGet(){
         try {
-            $res = $this->conex->prepare($this->queryGet);
+            $res = $this->__get("conex")->prepare($this->queryGet);
             $res->execute();
             $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -38,7 +38,7 @@ class regions extends connect{
 
     public function regionsPut($code){
         try {
-            $res = $this->conex->prepare($this->queryPut);
+            $res = $this->__get("conex")->prepare($this->queryPut);
             $res->bindValue("newName", $this->name_regions);
             $res->bindValue("newId", $this->id_country);
             $res->bindValue("code", $code);
@@ -53,7 +53,7 @@ class regions extends connect{
 
     public function regionsDelete($code){
         try {
-            $res = $this->conex->prepare($this->queryDelete);
+            $res = $this->__get("conex")->prepare($this->queryDelete);
             $res->bindValue("id", $code);
             $res->execute();
             $this->message = ["STATUS"=>200,"MESSAGE"=>"Delete Succesfull"];

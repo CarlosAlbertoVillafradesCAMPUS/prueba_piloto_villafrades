@@ -31,7 +31,11 @@ trait getInstance{
     }
     spl_autoload_register("autoload");
     /* countries::getInstance(json_decode(file_get_contents("php://input"), true))->countryPost();
-    regions::getInstance(json_decode(file_get_contents("php://input"), true))->regionsPost();
-    cities::getInstance(json_decode(file_get_contents("php://input"), true))->citiesPost(); */
+    regions::getInstance(json_decode(file_get_contents("php://input"), true))->regionsGet();
+    cities::getInstance(json_decode(file_get_contents("php://input"), true))->citiesPost();
     areas::getInstance(json_decode(file_get_contents("php://input"), true))->areasGet();
+    staff::getInstance(json_decode(file_get_contents("php://input"), true))->staffGet(); */
+    /* work_reference::getInstance(json_decode(file_get_contents("php://input"), true))->workReferencePut(541856); */
+    /* personal_ref::getInstance(json_decode(file_get_contents("php://input"), true))->personalRefPut(5423); */
+    emergency_contact::getInstance(json_decode(file_get_contents("php://input"), true))->emergencyContactPost();
 ?>

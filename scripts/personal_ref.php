@@ -1,30 +1,32 @@
 <?php
-class areas extends connect{
+class personal_ref extends connect{
     use getInstance;
     private $message;
-    private $queryPost = 'INSERT INTO areas(name_area) VALUES(:name)';
-    private $queryGet = 'SELECT id AS "code", name_area AS "nombreArea" FROM areas';
-    private $queryPut = 'UPDATE areas SET name_area = :newName WHERE id = :code';
-    private $queryDelete = 'DELETE FROM areas WHERE id = :id_area';
+    private $queryPost = 'INSERT INTO personal_ref(full_name, cel_number, relationship, occupation) VALUES (:name, :number_tel, :relation, :occupa)';
+    private $queryGet = 'SELECT * FROM personal_ref';
+    private $queryPut = 'UPDATE personal_ref SET full_name = :newName, cel_number = :newCelNumbre, relationship = :newRelation, occupation = :newOcupation WHERE id = :code';
+    private $queryDelete = 'DELETE FROM personal_ref WHERE id = :id';
 
+    public function __construct(public $full_name, private $cel_number, public $relationship, public $occupation){parent::__construct();}
 
-    public function __construct(public $name_area){parent::__construct();}
-
-    public function areasPost(){
+    public function personalRefPost(){
         try {
             $res = $this->__get("conex")->prepare($this->queryPost);
-            $res->bindValue("name", $this->name_area);
+            $res->bindValue("name", $this->full_name);
+            $res->bindValue("number_tel", $this->cel_number);
+            $res->bindValue("relation", $this->relationship);
+            $res->bindValue("occupa", $this->occupation);
             $res->execute();
             $this->message = ["STATUS"=>200,"MESSAGE"=>"Add Succesfull"];
+
         } catch (\PDOException $e) {
-            $this->message = $e->getMessage();
+           $this->message = $e->getMessage();
         } finally{
-            print_r($this->message);
+           print_r($this->message);
         }
-        
     }
 
-    public function areasGet(){
+    public function personalRefGet(){
         try {
             $res = $this->__get("conex")->prepare($this->queryGet);
             $res->execute();
@@ -36,10 +38,13 @@ class areas extends connect{
         }
     }
 
-    public function areasPut($code){
+    public function personalRefPut($code){
         try {
             $res = $this->__get("conex")->prepare($this->queryPut);
-            $res->bindValue("newName", $this->name_area);
+            $res->bindValue("newName", $this->full_name);
+            $res->bindValue("newCelNumbre", $this->cel_number);
+            $res->bindValue("newRelation", $this->relationship);
+            $res->bindValue("newOcupation", $this->occupation);
             $res->bindValue("code", $code);
             $res->execute();
             $this->message = ["STATUS"=>200,"MESSAGE"=>"Update Succesfull"];
@@ -50,10 +55,10 @@ class areas extends connect{
         }
     }
 
-    public function areasDelete($code){
+    public function personalRefDelete($code){
         try {
             $res = $this->__get("conex")->prepare($this->queryDelete);
-            $res->bindValue("id_area", $code);
+            $res->bindValue("id", $code);
             $res->execute();
             $this->message = ["STATUS"=>200,"MESSAGE"=>"Delete Succesfull"];
         } catch (\PDOException $e) {
