@@ -37,5 +37,15 @@ trait getInstance{
     staff::getInstance(json_decode(file_get_contents("php://input"), true))->staffGet(); */
     /* work_reference::getInstance(json_decode(file_get_contents("php://input"), true))->workReferencePut(541856); */
     /* personal_ref::getInstance(json_decode(file_get_contents("php://input"), true))->personalRefPut(5423); */
-    emergency_contact::getInstance(json_decode(file_get_contents("php://input"), true))->emergencyContactPost();
+    /* emergency_contact::getInstance(json_decode(file_get_contents("php://input"), true))->emergencyContactPost(); */
+    /* levels::getInstance(json_decode(file_get_contents("php://input"), true))->getLevels(); */
+    /* locations::getInstance(json_decode(file_get_contents("php://input"), true))->DeleteLocations(6); */
+    /* position::getInstance(json_decode(file_get_contents("php://input"), true))->UpdatePosition(7); */
+    /* subjects::getInstance(json_decode(file_get_contents("php://input"), true))->DeleteSubjects(8); */
+    /* team_educators::getInstance(json_decode(file_get_contents("php://input"), true))->UpdateTeamEducators(5); */
+    /* working_info::getInstance(json_decode(file_get_contents("php://input"), true))->getWorkingInfo(); */
+    contact_info::getInstance(json_decode(file_get_contents("php://input"), true))->getContactInfo();
+    /* position::getInstance(json_decode(file_get_contents("php://input"), true))->UpdatePosition(7); */
+    /* position::getInstance(json_decode(file_get_contents("php://input"), true))->UpdatePosition(7); */
+    /* position::getInstance(json_decode(file_get_contents("php://input"), true))->UpdatePosition(7); */
 ?>
