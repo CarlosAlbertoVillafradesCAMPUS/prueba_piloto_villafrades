@@ -11,7 +11,7 @@
 
         public function postPosition(){
             try {
-                $res = $this->conex->prepare($this->queryPostPosition);
+                $res = $this->__get("conex")->prepare($this->queryPostPosition);
                 $res->bindValue("name_position", $this->name_position);
                 $res->bindValue("arl_name", $this->arl_name);
                 $res->execute();
@@ -27,7 +27,7 @@
         
         public function getPosition(){
             try {
-                $res = $this->conex->prepare($this->queryGetPosition);
+                $res = $this->__get("conex")->prepare($this->queryGetPosition);
                 $res->execute();
                 $this->message = ["STATUS" => 200, "MESSAGE" => $res->fetchAll(PDO::FETCH_ASSOC)];
 
@@ -41,7 +41,7 @@
 
         public function UpdatePosition($id_position){
             try {
-                $res = $this->conex->prepare($this->queryUpdatePosition);
+                $res = $this->__get("conex")->prepare($this->queryUpdatePosition);
                 $res->bindValue("name_position", $this->name_position);
                 $res->bindValue("arl", $this->arl_name);
                 $res->bindValue("id_position", $id_position);
@@ -58,7 +58,7 @@
 
         public function DeletePosition($id_position){
             try {
-                $res = $this->conex->prepare($this->queryDeletePosition);
+                $res = $this->__get("conex")->prepare($this->queryDeletePosition);
                 $res->bindValue("id_position", $id_position);
                 $res->execute();
                 $this->message = ["STATUS" => 200, "MESSAGE" => "Delete Succesfull"];

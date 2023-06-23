@@ -44,8 +44,13 @@ trait getInstance{
     /* subjects::getInstance(json_decode(file_get_contents("php://input"), true))->DeleteSubjects(8); */
     /* team_educators::getInstance(json_decode(file_get_contents("php://input"), true))->UpdateTeamEducators(5); */
     /* working_info::getInstance(json_decode(file_get_contents("php://input"), true))->getWorkingInfo(); */
-    contact_info::getInstance(json_decode(file_get_contents("php://input"), true))->getContactInfo();
-    /* position::getInstance(json_decode(file_get_contents("php://input"), true))->UpdatePosition(7); */
-    /* position::getInstance(json_decode(file_get_contents("php://input"), true))->UpdatePosition(7); */
-    /* position::getInstance(json_decode(file_get_contents("php://input"), true))->UpdatePosition(7); */
+    // contact_info::getInstance(json_decode(file_get_contents("php://input"), true))->getContactInfo();
+    // journey::getInstance(json_decode(file_get_contents("php://input"), true))->updateJourney(1);
+    // academic_area::getInstance(json_decode(file_get_contents("php://input"), true))->postAcademicArea();
+    // admin_area::getInstance(json_decode(file_get_contents("php://input"), true))->postAdminArea();
+    // tutors::getInstance(json_decode(file_get_contents("php://input"), true))->postTutors();
+    // maint_area::getInstance(json_decode(file_get_contents("php://input"), true))->postMaintArea();
+    // marketing_area::getInstance(json_decode(file_get_contents("php://input"), true))->postMarketingArea();
+    // routes::getInstance(json_decode(file_get_contents("php://input"), true))->postRoutes();
+    admin_area::getInstance(json_decode(file_get_contents("php://input"), true))->postAdminArea(7);
 ?>
