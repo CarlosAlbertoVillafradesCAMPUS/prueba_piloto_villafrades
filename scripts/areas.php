@@ -1,4 +1,5 @@
 <?php
+namespace App;
 class areas extends connect{
     use getInstance;
     private $message;
@@ -28,7 +29,7 @@ class areas extends connect{
         try {
             $res = $this->__get("conex")->prepare($this->queryGet);
             $res->execute();
-            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
             $this->message = $e->getMessage();
         } finally{

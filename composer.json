@@ -1,0 +1,22 @@
+{
+    "name": "user/prueba_piloto_villafrades",
+    "description": "...",
+    "license": "LTS",
+    "autoload": {
+        "psr-4": {
+            "App\\": [
+                "./scripts/",
+                "./scripts/db/"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "CarlosAlbertoVillafradesCAMPUS",
+            "email": "cavillafrades@gmail.com"
+        }
+    ],
+    "require": {
+        "bramus/router": "~1.6"
+    }
+}

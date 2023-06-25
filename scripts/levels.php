@@ -1,4 +1,5 @@
 <?php
+namespace App;
     class levels extends connect{
         use getInstance;
         private $message;
@@ -11,7 +12,7 @@
 
         public function postLevels(){
             try {
-                $res = $this->conex->prepare($this->queryPostLevels);
+                $res = $this->__get("conex")->prepare($this->queryPostLevels);
                 $res->bindValue("name_levels", $this->name_levels);
                 $res->bindValue("group_levels", $this->group_levels);
                 $res->execute();
@@ -27,9 +28,9 @@
 
         public function getLevels(){
             try {
-                $res = $this->conex->prepare($this->queryGetLevels);
+                $res = $this->__get("conex")->prepare($this->queryGetLevels);
                 $res->execute();
-                $this->message = ["STATUS" => 200, "MESSAGE" => $res->fetchAll(PDO::FETCH_ASSOC)];
+                $this->message = ["STATUS" => 200, "MESSAGE" => $res->fetchAll(\PDO::FETCH_ASSOC)];
 
             } catch (\PDOException $error) {
                 $this->message = $error->getMessage();
@@ -41,7 +42,7 @@
 
         public function UpdateLevels($id_levels){
             try {
-                $res = $this->conex->prepare($this->queryUpdateLevels);
+                $res = $this->__get("conex")->prepare($this->queryUpdateLevels);
                 $res->bindValue("name_levels", $this->name_levels);
                 $res->bindValue("group_levels", $this->group_levels);
                 $res->bindValue("id_levels", $id_levels);
@@ -58,7 +59,7 @@
 
         public function DeleteLevels($id_levels){
             try {
-                $res = $this->conex->prepare($this->queryDeleteLevels);
+                $res = $this->__get("conex")->prepare($this->queryDeleteLevels);
                 $res->bindValue("id_levels", $id_levels);
                 $res->execute();
                 $this->message = ["STATUS" => 200, "MESSAGE" => "Delete Succesfull"];

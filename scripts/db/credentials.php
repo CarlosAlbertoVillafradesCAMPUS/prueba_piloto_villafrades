@@ -1,4 +1,5 @@
 <?php
+namespace App;
 abstract class credentials{
     protected $host = "localhost";
     private $user = "root";
