@@ -1,17 +1,38 @@
 import countries from "./components/countries.js";
+import regions from "./components/regions.js";
 
-let btnPais = document.querySelector("#btnPais");
-btnPais.addEventListener("click", (e)=>{
-    document.querySelector(".contPrincipal").innerHTML =  `
+//COUNTRIES
+let btn_countries = document.querySelector("#btn_countries");
+btn_countries.addEventListener("click", (e)=>{
+    document.querySelector(".contMain").innerHTML =  `
+    <h1 class="title">COUNTRIES</h1>
+    <ul class="breadcrumbs">
+        <li><a  id="agregarCountry" style="cursor: pointer;" class="active">Agregar</a></li>
+        <li class="divider">/</li>
+        <li><a class="registroCountry" style="cursor: pointer;">Registro</a></li>
+    </ul>
     <div class="containerForm">
-        <form id="formCountries">
-            <label for="">Ingrese el Nombre del pais a agregar</label>
-            <input type="text" name="name_country" required placeholder="Nombre del pais">
-            <button type="submit"> Agregar </button>
+    <h1 class="text-center">Countries</h1>
+        <form class="formTables" id="formCountries">
+        <div class="row">
+        <div class="col-12 d-flex flex-column justify-content-center mb-3">
+            <label for="">Ingrese el nombre del pais</label>
+            <input class="form-control" type="text" name="name_country" required placeholder="Nombre del pais">
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <button class="btnSubmit" type="submit"> Agregar </button>
+        </div>
+        </div>  
         </form>
 	</div
     `;
     countries.agregarCountry();
     countries.showForm();
     countries.showRegistro();
+})
+
+//REGIONS
+let btn_regions = document.querySelector("#btn_regions");
+btn_regions.addEventListener("click", (e)=>{
+    regions.showRegions();
 })

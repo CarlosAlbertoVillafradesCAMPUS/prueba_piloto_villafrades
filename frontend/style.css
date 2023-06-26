@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
-* {
-	font-family: 'Open Sans', sans-serif;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+* ul li a{
+	list-style: none;
+	text-decoration: none;
 }
 
 :root {
@@ -588,39 +586,27 @@ main .btn-send:hover {
 	width: 100%;
 	height: 70vh;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	align-items: center;
 	background-color: white;
 	padding: 0 15px;
 }
-#formCountries{
+.formTables{
 	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	border-radius: 10px;
 }
-#formCountries label{
+.containerForm label{
 	font-size: 15px;
 	font-weight: 600;
 	color: var(--dark);
 	margin-bottom:5px;
 }
-#formCountries input{
-	color: #333;
-	font-size: 15px;
-	margin-bottom: 20px;
-	padding: 0.3rem 1.5rem;
-	border-radius: 0.2rem;
-	background-color: var(--grey);
-	border: none;
-	border-bottom: 0.3rem solid transparent;
-	transition: all 0.3s;
-}
 
-#formCountries button{
+
+.containerForm button{
 	font-size: 15px;
 	padding: 0.3rem 1.5rem;
 	background: var(--blue);
@@ -630,7 +616,7 @@ main .btn-send:hover {
 	border: none;
 	transition: all .3s ease;
 }
-#formCountries button:hover{
+.containerForm button:hover{
 	background: var(--dark-blue);
 }
 .cont{
@@ -689,7 +675,6 @@ main .btn-send:hover {
   }
   #newForm{
 	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -713,8 +698,7 @@ main .btn-send:hover {
 	border-bottom: 0.3rem solid transparent;
 	transition: all 0.3s;
 }
-  #newForm button{
-	font-size: 15px;
+#newForm .btnSub{
 	padding: 0.3rem 1.5rem;
 	border-radius: 5px;
 	cursor: pointer;
@@ -723,7 +707,7 @@ main .btn-send:hover {
 	background-color: #c5bb00;
 	color: white;
   }
-  #newForm button:hover{
+ #newForm .btnSub:hover{
 	background-color: #fff200;
 }
 

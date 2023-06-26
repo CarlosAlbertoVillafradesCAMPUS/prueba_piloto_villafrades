@@ -4,13 +4,14 @@ class countries extends connect{
     use getInstance;
     private $message;
     private $queryPost = 'INSERT INTO countries(name_country) VALUES(:name)';
-    private $queryGet = 'SELECT id AS "code", name_country AS "name" FROM countries';
+    private $queryGetAll = 'SELECT id AS "code", name_country AS "name" FROM countries';
+    private $queryGetId = 'SELECT id AS "code", name_country AS "name" FROM countries WHERE id = :code';
     private $queryPut = 'UPDATE countries SET name_country = :value WHERE id = :code';
     private $queryDelete = 'DELETE FROM countries WHERE id = :id';
     public function __construct(){parent::__construct();}
 
     public function countryPost($name_country){
-        $myData = $this->countryGet();
+        $myData = $this->countryGetAll();
         $myData = array_values($myData["MESSAGE"]);
         $newArray = (array)[];
         foreach ($myData as $value) {
@@ -35,9 +36,22 @@ class countries extends connect{
        
     }
 
-    public function countryGet(){
+    public function countryGetAll(){
         try {
-            $res = $this->__get("conex")->prepare($this->queryGet);
+            $res = $this->__get("conex")->prepare($this->queryGetAll);
+            $res->execute();
+            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
+        } catch (\PDOException $e) {
+            $this->message = $e->getMessage();
+        } finally{
+            return $this->message;
+        }
+    }
+
+    public function countryGetId($id){
+        try {
+            $res = $this->__get("conex")->prepare($this->queryGetId);
+            $res->bindValue("code", $id);
             $res->execute();
             $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -49,7 +63,7 @@ class countries extends connect{
 
     public function countryUpdate($name_country, $code){
         $name_country = $name_country["name_country"];
-        $myData = $this->countryGet();
+        $myData = $this->countryGetAll();
         $myData = array_values($myData["MESSAGE"]);
         $newArray = (array)[];
         foreach ($myData as $value) {

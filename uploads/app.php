@@ -6,24 +6,42 @@ require_once "../vendor/autoload.php";
 
 $router = new \Bramus\Router\Router();
 
+//COUNTRIES
 $router->get("/countries", function(){
-    echo json_encode(\App\countries::getInstance()->countryGet());
+    echo json_encode(\App\countries::getInstance()->countryGetAll());
 });
-
+$router->get("/countries/{id}", function($id){
+    echo json_encode(\App\countries::getInstance()->countryGetId($id));
+});
 $router->delete("/countries/{id}", function($id){
     \App\countries::getInstance()->countryDelete($id);
 });
-
 $router->post("/countries", function(){
     $_DATA = json_decode(file_get_contents("php://input"), true);
    \App\countries::getInstance()->countryPost(...$_DATA);
 });
-
 $router->put("/countries/{id}", function($id){
     $_DATA = json_decode(file_get_contents("php://input"), true);
    \App\countries::getInstance()->countryUpdate($_DATA, $id);
 });
 
+
+//REGIONS
+$router->get("/regions", function(){
+    echo json_encode(\App\regions::getInstance()->regionsGet());
+});
+$router->get("/regions/{id}", function($id){
+    echo json_encode(\App\regions::getInstance()->regionsGetId($id));
+});
+$router->delete("/regions/{id}", function($id){
+    \App\regions::getInstance()->regionsDelete($id);
+});
+$router->post("/regions", function(){
+   \App\regions::getInstance(json_decode(file_get_contents("php://input"),true))->regionsPost(); 
+});
+$router->put("/regions/{id}", function($id){
+   \App\regions::getInstance(json_decode(file_get_contents("php://input"),true))->regionsPut($id);
+});
 $router->run();
 
     
