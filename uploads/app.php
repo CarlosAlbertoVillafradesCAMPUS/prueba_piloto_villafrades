@@ -1,20 +1,30 @@
 <?php
-namespace App;
+header("Access-Control-Allow-Origin: *");
+
 require_once "../vendor/autoload.php";
 
 $router = new \Bramus\Router\Router();
-
-$router->get("areas", function(){
-    \App\areas::getInstance(json_decode(file_get_contents("php://input"), true))->areasGet();
+$router->get("/countries", function(){
+    echo json_encode(\App\countries::getInstance()->countryGet(), JSON_PRETTY_PRINT);
 });
 
-$router->post("areas", function(){
-    \App\areas::getInstance(json_decode(file_get_contents("php://input"), true))->areasPost();
+$router->delete("/countries/{id}", function($id){
+    \App\countries::getInstance()->countryDelete($id);
+});
+
+$router->post("/countries", function(){
+    $_DATA = json_decode(file_get_contents("php://input"), true);
+   \App\countries::getInstance()->countryPost(...$_DATA);
+});
+
+$router->put("/countries/{id}", function($id){
+    $_DATA = json_decode(file_get_contents("php://input"), true);
+   \App\countries::getInstance()->countryUpdate($_DATA, $id);
 });
 
 $router->run();
 
-    // countries::getInstance(json_decode(file_get_contents("php://input"), true))->countryPost();
+    
     // regions::getInstance(json_decode(file_get_contents("php://input"), true))->regionsGet();
     // cities::getInstance(json_decode(file_get_contents("php://input"), true))->citiesPost();
    
