@@ -11,7 +11,7 @@ export default {
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
-        let res = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/countries", config)).text();
+        let res = await (await fetch("http://localhost/SpUkM01-093/prueba_piloto_villafrades/uploads/countries", config)).text();
         alert(res);
         formCountries.reset();
         })
@@ -26,7 +26,7 @@ export default {
                 header: {"Content-Type": "application/json"},
             }
 
-            let data = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/countries", config)).json();
+            let data = await (await fetch("http://localhost/SpUkM01-093/prueba_piloto_villafrades/uploads/countries", config)).json();
             document.querySelector(".containerForm").innerHTML = `
             <div class="cont">
             <h2>COUNTRIES</h2>
@@ -86,7 +86,7 @@ export default {
                     header: {"Content-Type": "application/json"},
                 }
     
-                let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/countries/${data}`, config)).text();
+                let res = await (await fetch(`http://localhost/SpUkM01-093/prueba_piloto_villafrades/uploads/countries/${data}`, config)).text();
                 alert(res);
                 window.location.reload();
             })
@@ -126,7 +126,7 @@ export default {
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
-        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/countries/${id}`, config)).text();
+        let res = await (await fetch(`http://localhost/SpUkM01-093/prueba_piloto_villafrades/uploads/countries/${id}`, config)).text();
         alert(res);
         newForm.reset();
         window.location.reload();

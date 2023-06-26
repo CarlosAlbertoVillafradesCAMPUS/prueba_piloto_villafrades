@@ -1,11 +1,13 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
+
 require_once "../vendor/autoload.php";
 
 $router = new \Bramus\Router\Router();
+
 $router->get("/countries", function(){
-    echo json_encode(\App\countries::getInstance()->countryGet(), JSON_PRETTY_PRINT);
+    echo json_encode(\App\countries::getInstance()->countryGet());
 });
 
 $router->delete("/countries/{id}", function($id){
