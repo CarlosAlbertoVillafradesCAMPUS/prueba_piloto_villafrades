@@ -1,13 +1,14 @@
 <?php
-
+namespace App;
 class staff extends connect{
     use getInstance;
     private $queryPost = 'INSERT INTO staff(doc, first_name, second_name, first_surname, second_surname, eps, id_area, id_city) VALUES (:cc, :firstName, :secondName, :firstSurname, :secondSurname, :eps, :codeArea, :codeCity)';
     private $queryGet = 'SELECT staff.id AS id, doc AS cc, first_name AS name_first, second_name AS name_second, first_surname AS surname_first, second_surname AS surname_second, eps, cities.id AS city_code, name_city AS city_name, areas.id AS area_code, name_area AS area_name FROM staff INNER JOIN cities ON staff.id_city = cities.id INNER JOIN areas ON staff.id_area = areas.id';
+    private $queryGetId = 'SELECT staff.id AS id, doc AS cc, first_name AS name_first, second_name AS name_second, first_surname AS surname_first, second_surname AS surname_second, eps, cities.id AS city_code, name_city AS city_name, areas.id AS area_code, name_area AS area_name FROM staff INNER JOIN cities ON staff.id_city = cities.id INNER JOIN areas ON staff.id_area = areas.id WHERE staff.id = :id';
     private $queryPut = 'UPDATE staff SET doc = :cc, first_name = :newFirstName, second_name = :newSecondName, first_surname = :newFirstSurname, second_surname = :newSecondSurname, eps = :newEps, id_area = :newIdArea, id_city = :newIdCity WHERE id = :code';
     private $queryDelete = 'DELETE FROM staff WHERE id = :code';
 
-    public function __construct(private $doc,public $first_name, public $second_name, public $first_surname, public $second_surname, public $eps, public $id_area, public $id_city){parent::__construct();}
+    public function __construct(private $doc=1,public $first_name=1, public $second_name=1, public $first_surname=1, public $second_surname=1, public $eps=1, public $id_area=1, public $id_city=1){parent::__construct();}
 
     public function staffPost(){
         try {
@@ -34,11 +35,24 @@ class staff extends connect{
         try {
             $res = $this->__get("conex")->prepare($this->queryGet);
             $res->execute();
-            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
             $this->message = $e->getMessage();
         } finally{
-            print_r($this->message);
+            return $this->message;
+        }
+    }
+
+    public function staffGetId($code){
+        try {
+            $res = $this->__get("conex")->prepare($this->queryGetId);
+            $res->bindValue("id", $code);
+            $res->execute();
+            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
+        } catch (\PDOException $e) {
+            $this->message = $e->getMessage();
+        } finally{
+            return $this->message;
         }
     }
 

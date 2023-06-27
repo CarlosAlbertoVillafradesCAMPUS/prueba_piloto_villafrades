@@ -5,11 +5,12 @@ class areas extends connect{
     private $message;
     private $queryPost = 'INSERT INTO areas(name_area) VALUES(:name)';
     private $queryGet = 'SELECT id AS "code", name_area AS "nombreArea" FROM areas';
+    private $queryGetId = 'SELECT id AS "code", name_area AS "nombreArea" FROM areas WHERE id = :id';
     private $queryPut = 'UPDATE areas SET name_area = :newName WHERE id = :code';
     private $queryDelete = 'DELETE FROM areas WHERE id = :id_area';
 
 
-    public function __construct(public $name_area){parent::__construct();}
+    public function __construct(public $name_area=1){parent::__construct();}
 
     public function areasPost(){
         try {
@@ -33,7 +34,20 @@ class areas extends connect{
         } catch (\PDOException $e) {
             $this->message = $e->getMessage();
         } finally{
-            print_r($this->message);
+            return $this->message;
+        }
+    }
+
+    public function areasGetId($code){
+        try {
+            $res = $this->__get("conex")->prepare($this->queryGetId);
+            $res->bindValue("id", $code);
+            $res->execute();
+            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
+        } catch (\PDOException $e) {
+            $this->message = $e->getMessage();
+        } finally{
+            return $this->message;
         }
     }
 

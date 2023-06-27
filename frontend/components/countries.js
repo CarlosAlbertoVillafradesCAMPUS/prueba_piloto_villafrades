@@ -7,6 +7,14 @@ export default {
         e.preventDefault();
         let data = Object.fromEntries(new FormData(e.target));
         data.name_country = data.name_country.toLocaleUpperCase();
+       /*  let config = {
+            method: "POST",
+            header: {"Content-Type": "application/json"},
+            body:JSON.stringify(data)
+        }
+        let res = await (await fetch("http://localhost/SkylAb-117/prueba_piloto_villafrades/uploads/countries", config)).text();
+         */
+        //el codigo anterior hace referencia a la siguiente linea de codigo
         let res = await ApiCountries.postCountries(data);
         alert(res);
         formCountries.reset();
@@ -22,7 +30,7 @@ export default {
             document.querySelector(".containerForm").innerHTML = `
             <div class="cont">
             <h2>COUNTRIES</h2>
-            <table class="tableCountry">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>ID</th>

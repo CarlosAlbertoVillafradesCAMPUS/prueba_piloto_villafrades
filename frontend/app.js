@@ -1,5 +1,8 @@
 import countries from "./components/countries.js";
 import regions from "./components/regions.js";
+import cities from "./components/cities.js";
+import areas from "./components/areas.js";
+import staff from "./components/staff.js";
 
 //COUNTRIES
 let btn_countries = document.querySelector("#btn_countries");
@@ -36,3 +39,22 @@ let btn_regions = document.querySelector("#btn_regions");
 btn_regions.addEventListener("click", (e)=>{
     regions.showRegions();
 })
+
+//CITIES
+let btn_cities = document.querySelector("#btn_cities");
+btn_cities.addEventListener("click", (e)=>{
+    cities.showCities();
+})
+
+//AREAS
+let btn_areas = document.querySelector("#btn_areas");
+btn_areas.addEventListener("click", (e)=>{
+    areas.showAreas();
+})
+
+//STAFF
+let btn_staff = document.querySelector("#btn_staff");
+btn_staff.addEventListener("click", (e)=>{
+    staff.showStaff();
+})
+

@@ -1,35 +1,35 @@
 import ApiRegions from "../API/ApiRegions.js";
-import ApiCountries from "../API/ApiCountries.js";
+import ApiCities from "../API/ApiCities.js";
 
 
 export default {
-    async showRegions(){
-        let countries = await ApiCountries.getCountries();
-        console.log(countries);
+    async showCities(){
+        let regions = await ApiRegions.getRegions();
+        console.log(regions);
         document.querySelector(".contMain").innerHTML =  `
-    <h1 class="title">Regions</h1>
+    <h1 class="title">Cities</h1>
     <ul class="breadcrumbs">
-        <li><a  id="agregarRegions" style="cursor: pointer;" class="active">Agregar</a></li>
+        <li><a  id="agregarCities" style="cursor: pointer;" class="active">Agregar</a></li>
         <li class="divider">/</li>
-        <li><a class="registroRegions" style="cursor: pointer;">Registro</a></li>
+        <li><a class="registroCities" style="cursor: pointer;">Registro</a></li>
     </ul>
     <div class="containerForm">
-    <h1 class="text-center">Regions</h1>
-        <form class="formTables" id="formRegions">
+    <h1 class="text-center">Cities</h1>
+        <form class="formTables" id="formCities">
         <div class="row">
-        <div class="col-12 d-flex flex-column justify-content-center">
-            <label for="">Seleccione el pais</label>
-            <select class="form-select" aria-label="Default select example" name="id_country">
-            ${countries.MESSAGE.map((val,id)=>{
+        <div class="col-12 d-flex flex-column justify-content-center mb-2">
+            <label for="">Seleccione la Region</label>
+            <select class="form-select " aria-label="Default select example" name="id_region">
+            ${regions.MESSAGE.map((val,id)=>{
                 return `
-                <option value="${val.code}">${val.name}</option>
+                <option value="${val.codeRegion}">${val.nombreRegion}</option>
                 `
             })}
             </select>
         </div>
         <div class="col-12 d-flex flex-column justify-content-center mb-3">
-            <label for="">Ingrese la region del pais</label>
-            <input class="form-control" type="text" name="name_region" required placeholder="Nombre region">
+            <label for="">Ingrese la la ciudad del pais</label>
+            <input class="form-control" type="text" name="name_city" required placeholder="Nombre ciudad">
         </div>
         <div class="col-12 d-flex justify-content-center">
             <button class="btnSubmit" type="submit"> Agregar </button>
@@ -38,47 +38,47 @@ export default {
         </form>
 	</div`
 
-    this.agregarRegion();
+    this.agregarCities();
     this.showRegistro();
     },
 
-    agregarRegion(){
-        let formRegions = document.querySelector("#formRegions")
-        formRegions.addEventListener("submit", async (e)=>{
+    agregarCities(){
+        let formCities = document.querySelector("#formCities")
+        formCities.addEventListener("submit", async (e)=>{
         e.preventDefault();
         let data = Object.fromEntries(new FormData(e.target));
-        data.name_region = data.name_region.toLocaleUpperCase();
+        data.name_city = data.name_city.toLocaleUpperCase();
 
-       let res = await ApiRegions.postRegions(data);
+       let res = await ApiCities.postCities(data);
         alert(res);
-        formRegions.reset();
+        formCities.reset();
         })
     },
 
     showRegistro(){
-        let registro = document.querySelector(".registroRegions");
-        let agregar = document.querySelector("#agregarRegions");
+        let registro = document.querySelector(".registroCities");
+        let agregar = document.querySelector("#agregarCities");
         registro.addEventListener("click", async (e)=>{
-           let data = await ApiRegions.getRegions();
+           let data = await ApiCities.getCities();
             document.querySelector(".containerForm").innerHTML = `
             <div class="cont">
-            <h2>REGIONS</h2>
+            <h2>CITIES</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID REGION</th>
+                        <th>ID CITY</th>
+                        <th>NAME CITY</th>
                         <th>NAME REGION</th>
-                        <th>NAME COUNTRY</th>
                     </tr>
                 </thead>
                 <tbody class="tableBody">
-                ${data.MESSAGE.map(region=>{
+                ${data.MESSAGE.map(city=>{
                     return `
                     <tr>
-                    <td>${region.codeRegion}</td>
-                    <td>${region.nombreRegion}</td>
-                    <td>${region.nombreCountry}</td>
-                    <td class="contBut"><button  data-id="${region.codeRegion}" id="modificar" class="btnSelec">M</button> <button data-id="${region.codeRegion}" id="eliminar" class="btnSelec">X</button></td>
+                    <td>${city.codeCity}</td>
+                    <td>${city.nombreCity}</td>
+                    <td>${city.nombreRegion}</td>
+                    <td class="contBut"><button  data-id="${city.codeCity}" id="modificar" class="btnSelec">M</button> <button data-id="${city.codeCity}" id="eliminar" class="btnSelec">X</button></td>
                     </tr>
                     `
                 }).join("")}
@@ -88,7 +88,7 @@ export default {
             registro.className += " active";
             agregar.classList.remove("active");
 
-            this.DeleteRegion();
+            this.DeleteCities();
             this.showUpdate();
             this.showForm();
             
@@ -96,24 +96,24 @@ export default {
     },
 
     showForm(){
-        let registro = document.querySelector(".registroRegions");
-        let agregar = document.querySelector("#agregarRegions");
+        let registro = document.querySelector(".registroCities");
+        let agregar = document.querySelector("#agregarCities");
 
         agregar.addEventListener("click",(e)=>{
-          this.showRegions();
+          this.showCities();
         agregar.className += " active";
         registro.classList.remove("active");
-        this.agregarRegion();
+        this.agregarCountry();
         })
     },
 
-    DeleteRegion(){
+    DeleteCities(){
         let btnDelete = document.querySelectorAll("#eliminar");
         btnDelete.forEach((val,id) => {
             val.addEventListener("click", async (e)=>{
                 console.log(val.dataset.id);
                 let data =val.dataset.id;
-                let res = await ApiRegions.deleteRegions(data);
+                let res = await ApiCities.deleteCities(data);
                alert(res);
                 window.location.reload();
             })
@@ -125,30 +125,30 @@ export default {
         btnUpdate.forEach((val,id) => {
             console.log(val);
             val.addEventListener("click", async (e)=>{
-                let idRegion = val.dataset.id;
-                console.log(idRegion);
-                let countries = await ApiCountries.getCountries();
-                let regionUpdate = await ApiRegions.getRegionsId(idRegion);
+                let idCity = val.dataset.id;
+                console.log(idCity);
+                let regions = await ApiRegions.getRegions();
+                let cityUpdate = await ApiCities.getCitiesId(idCity);
                document.querySelector(".containerForm").innerHTML =  `
-               <h1 class="text-center">Modificar Regions</h1>
+               <h1 class="text-center">Modificar Cities</h1>
             <form class="formTables" id="newForm">
             <div class="row">
             <div class="col-12 d-flex flex-column justify-content-center">
-                <label for="">Seleccione el pais</label>
-                <select class="form-select" aria-label="Default select example" name="id_country">
-                ${countries.MESSAGE.map((val,id)=>{
+                <label for="">Seleccione la region</label>
+                <select class="form-select" aria-label="Default select example" name="id_region">
+                ${regions.MESSAGE.map((val,id)=>{
                     return `
-                    <option value="${val.code}">${val.name}</option>
+                    <option value="${val.codeRegion}">${val.nombreRegion}</option>
                     `
                 })}
                 </select>
             </div>
             <div class="col-12 d-flex flex-column justify-content-center mb-3">
-                <label for="">Ingrese la region del pais</label>
-                <input class="form-control" value="${regionUpdate.MESSAGE[0].nombreRegion}" type="text" name="name_region" required placeholder="Nombre region">
+                <label for="">Ingrese la ciudad de la region</label>
+                <input class="form-control" value="${cityUpdate.MESSAGE[0].nombreCity}" type="text" name="name_city" required placeholder="Nombre region">
             </div>
             <div class="col-12 d-flex justify-content-center">
-                <button id="${idRegion}" class="btnSub fs-4" type="submit"> Modificar </button>
+                <button id="${idCity}" class="btnSub fs-4" type="submit"> Modificar </button>
             </div>
             </div>  
             </form>`;
@@ -165,8 +165,8 @@ export default {
         let id = btnSub.id;
         console.log(id);
         let data = Object.fromEntries(new FormData(e.target));
-        data.name_region = data.name_region.toLocaleUpperCase();
-        let res = await ApiRegions.updateRegions(data, id);
+        data.name_city = data.name_city.toLocaleUpperCase();
+        let res = await ApiCities.updateCities(data, id);
         alert(res);
         newForm.reset();
         window.location.reload();

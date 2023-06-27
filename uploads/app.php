@@ -42,6 +42,59 @@ $router->post("/regions", function(){
 $router->put("/regions/{id}", function($id){
    \App\regions::getInstance(json_decode(file_get_contents("php://input"),true))->regionsPut($id);
 });
+
+
+//CITIES
+$router->get("/cities", function(){
+    echo json_encode(\App\cities::getInstance()->citiesGet());
+});
+$router->get("/cities/{id}", function($id){
+    echo json_encode(\App\cities::getInstance()->citiesGetId($id));
+});
+$router->delete("/cities/{id}", function($id){
+    \App\cities::getInstance()->citiesDelete($id);
+});
+$router->post("/cities", function(){
+   \App\cities::getInstance(json_decode(file_get_contents("php://input"),true))->citiesPost(); 
+});
+$router->put("/cities/{id}", function($id){
+   \App\cities::getInstance(json_decode(file_get_contents("php://input"),true))->citiesPut($id);
+});
+
+
+//AREAS
+$router->get("/areas", function(){
+    echo json_encode(\App\areas::getInstance()->areasGet());
+});
+$router->get("/areas/{id}", function($id){
+    echo json_encode(\App\areas::getInstance()->areasGetId($id));
+});
+$router->delete("/areas/{id}", function($id){
+    \App\areas::getInstance()->areasDelete($id);
+});
+$router->post("/areas", function(){
+   \App\areas::getInstance(json_decode(file_get_contents("php://input"),true))->areasPost(); 
+});
+$router->put("/areas/{id}", function($id){
+   \App\areas::getInstance(json_decode(file_get_contents("php://input"),true))->areasPut($id);
+});
+
+//STAFF
+$router->get("/staff", function(){
+    echo json_encode(\App\staff::getInstance()->staffGet());
+});
+$router->get("/staff/{id}", function($id){
+    echo json_encode(\App\staff::getInstance()->staffGetId($id));
+});
+$router->delete("/staff/{id}", function($id){
+    \App\staff::getInstance()->staffDelete($id);
+});
+$router->post("/staff", function(){
+   \App\staff::getInstance(json_decode(file_get_contents("php://input"),true))->staffPost(); 
+});
+$router->put("/staff/{id}", function($id){
+   \App\staff::getInstance(json_decode(file_get_contents("php://input"),true))->staffPut($id);
+});
 $router->run();
 
     
