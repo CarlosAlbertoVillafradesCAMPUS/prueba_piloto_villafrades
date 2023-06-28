@@ -55,7 +55,7 @@ export default {
         </div>
         <div class="col-6 d-flex flex-column justify-content-center mb-2">
             <label for="">Seleccione el viaje</label>
-            <select class="form-select " aria-label="Default select example" name="id_journey">
+            <select class="form-select " aria-label="Default select example" name="id_journeys">
             ${journey.MESSAGE.map((val,id)=>{
                 return `
                 <option value="${val.id}">${val.name_journey} ${val.check_in} - ${val.check_out}</option>
@@ -91,6 +91,7 @@ export default {
         let agregar = document.querySelector("#agregarAcademicArea");
         registro.addEventListener("click", async (e)=>{
            let data = await ApiAcademicArea.getAcademicArea();
+           console.log(data);
             document.querySelector(".containerForm").innerHTML = `
             <div class="cont">
             <h2>Academic Area</h2>
@@ -111,7 +112,7 @@ export default {
                     <tr>
                     <td>${AcademicArea.id}</td>
                     <td>${AcademicArea.doc}</td>
-                    <td>${AcademicArea.name_first} ${AcademicArea.name_second} ${AcademicArea.surname_first}</td>
+                    <td>${AcademicArea.first_name} ${AcademicArea.second_name} ${AcademicArea.first_surname}</td>
                     <td>${AcademicArea.name_area}</td>
                     <td>${AcademicArea.name_position}</td>
                     <td>${AcademicArea.name_journey}</td>
@@ -207,7 +208,7 @@ export default {
     </div>
     <div class="col-6 d-flex flex-column justify-content-center mb-2">
         <label for="">Seleccione el viaje</label>
-        <select class="form-select " aria-label="Default select example" name="id_journey">
+        <select class="form-select " aria-label="Default select example" name="id_journeys">
         <option value="${AcademicArea.MESSAGE[0].id_journey}">${AcademicArea.MESSAGE[0].name_journey} ${AcademicArea.MESSAGE[0].check_in} - ${AcademicArea.MESSAGE[0].check_out}</option>
         ${journey.MESSAGE.map((val,id)=>{
             return `

@@ -111,7 +111,7 @@ export default {
                     <tr>
                     <td>${MarketingArea.id}</td>
                     <td>${MarketingArea.doc}</td>
-                    <td>${MarketingArea.name_first} ${MarketingArea.name_second} ${MarketingArea.surname_first}</td>
+                    <td>${MarketingArea.first_name} ${MarketingArea.second_name} ${MarketingArea.first_surname}</td>
                     <td>${MarketingArea.name_area}</td>
                     <td>${MarketingArea.name_position}</td>
                     <td>${MarketingArea.name_journey}</td>

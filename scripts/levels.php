@@ -33,7 +33,7 @@ namespace App;
                     print_r($this->message);
                 }
             } else{
-                print_r(["STATUS"=>200,"MESSAGE"=>"Error!!, ".$this->name_location." ya se encuentra registrado"]);
+                print_r(["STATUS"=>200,"MESSAGE"=>"Error!!, ".$this->name_level." ya se encuentra registrado"]);
             }
         }
 

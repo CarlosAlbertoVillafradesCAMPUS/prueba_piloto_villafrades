@@ -111,7 +111,7 @@ export default {
                     <tr>
                     <td>${MaintArea.id}</td>
                     <td>${MaintArea.doc}</td>
-                    <td>${MaintArea.name_first} ${MaintArea.name_second} ${MaintArea.surname_first}</td>
+                    <td>${MaintArea.first_name} ${MaintArea.second_name} ${MaintArea.first_surname}</td>
                     <td>${MaintArea.name_area}</td>
                     <td>${MaintArea.name_position}</td>
                     <td>${MaintArea.name_journey}</td>

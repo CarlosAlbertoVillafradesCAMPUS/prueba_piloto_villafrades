@@ -1,7 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-
 require_once "../vendor/autoload.php";
 
 $router = new \Bramus\Router\Router();
@@ -28,7 +27,7 @@ $router->put("/countries/{id}", function($id){
 
 //REGIONS
 $router->get("/regions", function(){
-    echo json_encode(\App\regions::getInstance()->regionsGet(), JSON_PRETTY_PRINT);
+    echo json_encode(\App\regions::getInstance()->regionsGet());
 });
 $router->get("/regions/{id}", function($id){
     echo json_encode(\App\regions::getInstance()->regionsGetId($id));
@@ -193,6 +192,7 @@ $router->delete("/levels/{id}", function($id){
     \App\levels::getInstance()->DeleteLevels($id);
 });
 $router->post("/levels", function(){
+    var_dump(json_decode(file_get_contents("php://input"),true));
    \App\levels::getInstance(json_decode(file_get_contents("php://input"),true))->postLevels(); 
 });
 $router->put("/levels/{id}", function($id){

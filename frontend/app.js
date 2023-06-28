@@ -131,13 +131,13 @@ btn_academic_area.addEventListener("click", (e)=>{
     academicArea.showAcademicArea();
 })
 
-//MAINT AREA
+ //MAINT AREA
 let btn_maint_area = document.querySelector("#btn_maint_area");
 btn_maint_area.addEventListener("click", (e)=>{
     maintArea.showMaintArea();
 })
 
-//MARKETING AREA
+ //MARKETING AREA
 let btn_marketing_area = document.querySelector("#btn_marketing_area");
 btn_marketing_area.addEventListener("click", (e)=>{
     marketingArea.showMarketingArea();

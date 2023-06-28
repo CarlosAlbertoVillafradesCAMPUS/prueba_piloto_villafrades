@@ -1,7 +1,7 @@
 import ApiLevels from "../API/ApiLevels.js";
 
 export default {
-    async showLevels(){
+    showLevels(){
         document.querySelector(".contMain").innerHTML =  `
     <h1 class="title">Levels</h1>
     <ul class="breadcrumbs">
@@ -28,19 +28,20 @@ export default {
         </form>
 	</div>`
 
-    this.agregarLevels();
+    this.AgregarLevels();
     this.showRegistro();
     },
 
-    agregarLevels(){
+    AgregarLevels(){
         let formLevels = document.querySelector("#formLevels")
         formLevels.addEventListener("submit", async (e)=>{
         e.preventDefault();
         let data = Object.fromEntries(new FormData(e.target));
         data.name_level = data.name_level.toLocaleUpperCase();
         data.group_level = data.group_level.toLocaleUpperCase();
-
+        console.log(data);
        let res = await ApiLevels.postLevels(data);
+
         alert(res);
         formLevels.reset();
         })
@@ -48,9 +49,11 @@ export default {
 
     showRegistro(){
         let registro = document.querySelector(".registroLevels");
+        console.log(registro);
         let agregar = document.querySelector("#agregarLevels");
         registro.addEventListener("click", async (e)=>{
-           let data = await ApiLevels.getLevels();
+            let data = await ApiLevels.getLevels();
+
             document.querySelector(".containerForm").innerHTML = `
             <div class="cont">
             <h2>Levels</h2>
@@ -82,7 +85,6 @@ export default {
             this.DeleteLevels();
             this.showUpdate();
             this.showForm();
-            
         })
     },
 
@@ -135,12 +137,12 @@ export default {
             </div>
             </div>  
             </form>`;
-           this.updateRegion();
+           this.updateLevels();
             })
         });
     },
 
-    updateRegion(){
+    updateLevels(){
         let newForm = document.querySelector("#newForm");
         newForm.addEventListener("submit", async (e)=>{
         e.preventDefault();

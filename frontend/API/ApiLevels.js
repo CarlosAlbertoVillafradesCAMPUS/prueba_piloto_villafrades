@@ -4,7 +4,8 @@ export default {
             method: "GET",
             header: {"Content-Type": "application/json"},
         }
-
+        console.log("yeaaa");
+        
         let data = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/levels", config)).json();
         return data;
     },
@@ -25,6 +26,7 @@ export default {
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
+        console.log("yeaaa");
         let res = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/levels", config)).text();
         return res;
     },

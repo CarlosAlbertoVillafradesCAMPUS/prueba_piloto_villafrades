@@ -44,7 +44,6 @@ class regions extends connect{
         } catch (\PDOException $e) {
             $this->message = $e->getMessage();
         } finally{
-            echo "yeaaa";
             return $this->message;
         }
     }

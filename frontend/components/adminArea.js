@@ -91,6 +91,7 @@ export default {
         let agregar = document.querySelector("#agregarAdminArea");
         registro.addEventListener("click", async (e)=>{
            let data = await ApiAdminArea.getAdminArea();
+           console.log(data);
             document.querySelector(".containerForm").innerHTML = `
             <div class="cont">
             <h2>Admin Area</h2>
@@ -111,7 +112,7 @@ export default {
                     <tr>
                     <td>${AdminArea.id}</td>
                     <td>${AdminArea.doc}</td>
-                    <td>${AdminArea.name_first} ${AdminArea.name_second} ${AdminArea.surname_first}</td>
+                    <td>${AdminArea.first_name} ${AdminArea.second_name} ${AdminArea.first_surname}</td>
                     <td>${AdminArea.name_area}</td>
                     <td>${AdminArea.name_position}</td>
                     <td>${AdminArea.name_journey}</td>
