@@ -36,7 +36,7 @@ export default {
         </div>
         </div>  
         </form>
-	</div`
+	</div>`
 
     this.agregarRegion();
     this.showRegistro();
@@ -103,7 +103,6 @@ export default {
           this.showRegions();
         agregar.className += " active";
         registro.classList.remove("active");
-        this.agregarRegion();
         })
     },
 

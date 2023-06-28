@@ -68,7 +68,7 @@ export default {
         </div>
         </div>  
         </form>
-	</div`
+	</div>`
 
     this.agregarStaff();
     this.showRegistro();
@@ -146,7 +146,6 @@ export default {
           this.showStaff();
         agregar.className += " active";
         registro.classList.remove("active");
-        this.agregarStaff();
         })
     },
 
@@ -174,13 +173,6 @@ export default {
                 let cities = await ApiCities.getCities();
                 let areas = await ApiAreas.getAreas();
                document.querySelector(".containerForm").innerHTML =  `
-    <h1 class="title">Staff</h1>
-    <ul class="breadcrumbs">
-        <li><a  id="agregarStaff" style="cursor: pointer;" class="active">Agregar</a></li>
-        <li class="divider">/</li>
-        <li><a class="registroStaff" style="cursor: pointer;">Registro</a></li>
-    </ul>
-    <div class="containerForm">
     <h1 class="text-center">Staff</h1>
         <form class="formTables" id="newForm">
         <div class="row">
@@ -234,8 +226,7 @@ export default {
         <button id="${idStaff}" class="btnSub fs-4" type="submit"> Modificar </button>
         </div>
         </div>  
-        </form>
-	</div`;
+        </form>`;
            this.updateRegion();
             })
         });

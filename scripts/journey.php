@@ -1,13 +1,15 @@
 <?php
+namespace App;
     class journey extends connect{
         use getInstance;
         private $message;
         private $queryPostJourney = 'INSERT INTO journey (name_journey, check_in, check_out) VALUES (:name_journey, :check_in, :check_out)';
         private $queryGetJourney = 'SELECT * FROM journey';
+        private $queryGetJourneyId = 'SELECT * FROM journey WHERE id = :id';
         private $queryUpdateJourney = 'UPDATE journey SET name_journey = :name_journey, check_in = :check_in, check_out = :check_out WHERE id = :id_journey';
         private $queryDeleteJourney = 'DELETE FROM journey WHERE id = :id_journey';
 
-        public function __construct(public $name_journey, public $check_in, public $check_out){parent::__construct();}
+        public function __construct(public $name_journey=1, public $check_in=1, public $check_out=1){parent::__construct();}
 
         public function postJourney(){
             try {
@@ -30,13 +32,28 @@
             try {
                 $res = $this->__get("conex")->prepare($this->queryGetJourney);
                 $res->execute();
-                $this->message = ["STATUS" => 200, "MESSAGE" =>$res->fetchAll(PDO::FETCH_ASSOC)];
+                $this->message = ["STATUS" => 200, "MESSAGE" =>$res->fetchAll(\PDO::FETCH_ASSOC)];
 
             } catch (\PDOException $error) {
                 $this->message = $error->getMessage();
 
             } finally {
-                print_r($this->message);
+                return $this->message;
+            }
+        }
+
+        public function getJourneyId($code){
+            try {
+                $res = $this->__get("conex")->prepare($this->queryGetJourneyId);
+                $res->bindValue("id", $code);
+                $res->execute();
+                $this->message = ["STATUS" => 200, "MESSAGE" =>$res->fetchAll(\PDO::FETCH_ASSOC)];
+
+            } catch (\PDOException $error) {
+                $this->message = $error->getMessage();
+
+            } finally {
+                return $this->message;
             }
         }
 

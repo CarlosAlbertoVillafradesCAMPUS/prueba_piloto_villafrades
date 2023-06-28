@@ -1,23 +1,25 @@
-import ApiAreas from "../API/ApiAreas.js";
-
-
+import ApiPosition from "../API/ApiPosition.js";
 
 export default {
-    async showAreas(){
+    async showPosition(){
         document.querySelector(".contMain").innerHTML =  `
-    <h1 class="title">Areas</h1>
+    <h1 class="title">Position</h1>
     <ul class="breadcrumbs">
-        <li><a  id="agregarAreas" style="cursor: pointer;" class="active">Agregar</a></li>
+        <li><a  id="agregarPosition" style="cursor: pointer;" class="active">Agregar</a></li>
         <li class="divider">/</li>
-        <li><a class="registroAreas" style="cursor: pointer;">Registro</a></li>
+        <li><a class="registroPosition" style="cursor: pointer;">Registro</a></li>
     </ul>
     <div class="containerForm">
-    <h1 class="text-center">Areas</h1>
-        <form class="formTables" id="formAreas">
+    <h1 class="text-center">Position</h1>
+        <form class="formTables" id="formPosition">
         <div class="row">
+        <div class="col-12 d-flex flex-column justify-content-center mb-2">
+            <label for="">Nombre Posicion</label>
+            <input class="form-control mt-2" type="text" name="name_position" required placeholder="Nombre Posicion">
+        </div>
         <div class="col-12 d-flex flex-column justify-content-center mb-3">
-            <label for="">Ingrese el nombre del area</label>
-            <input class="form-control mt-2" type="text" name="name_area" required placeholder="Nombre area">
+            <label for="">ARL</label>
+            <input class="form-control mt-2" type="text" name="arl" required placeholder="">
         </div>
         <div class="col-12 d-flex justify-content-center">
             <button class="btnSubmit" type="submit"> Agregar </button>
@@ -26,45 +28,46 @@ export default {
         </form>
 	</div>`
 
-    this.agregarAreas();
+    this.agregarPosition();
     this.showRegistro();
     },
 
-    agregarAreas(){
-        let formAreas = document.querySelector("#formAreas")
-        formAreas.addEventListener("submit", async (e)=>{
+    agregarPosition(){
+        let formPosition = document.querySelector("#formPosition")
+        formPosition.addEventListener("submit", async (e)=>{
         e.preventDefault();
         let data = Object.fromEntries(new FormData(e.target));
-        data.name_area = data.name_area.toLocaleUpperCase();
 
-       let res = await ApiAreas.postAreas(data);
+       let res = await ApiPosition.postPosition(data);
         alert(res);
-        formAreas.reset();
+        formPosition.reset();
         })
     },
 
     showRegistro(){
-        let registro = document.querySelector(".registroAreas");
-        let agregar = document.querySelector("#agregarAreas");
+        let registro = document.querySelector(".registroPosition");
+        let agregar = document.querySelector("#agregarPosition");
         registro.addEventListener("click", async (e)=>{
-           let data = await ApiAreas.getAreas();
+           let data = await ApiPosition.getPosition();
             document.querySelector(".containerForm").innerHTML = `
             <div class="cont">
-            <h2>Areas</h2>
+            <h2>Position</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>NAME</th>
+                        <th>ARL</th>
                     </tr>
                 </thead>
                 <tbody class="tableBody">
-                ${data.MESSAGE.map(area=>{
+                ${data.MESSAGE.map(Position=>{
                     return `
                     <tr>
-                    <td>${area.code}</td>
-                    <td>${area.nombreArea}</td>
-                    <td class="contBut"><button  data-id="${area.code}" id="modificar" class="btnSelec">M</button> <button data-id="${area.code}" id="eliminar" class="btnSelec">X</button></td>
+                    <td>${Position.id}</td>
+                    <td>${Position.name_position}</td>
+                    <td>${Position.arl}</td>
+                    <td class="contBut"><button  data-id="${Position.id}" id="modificar" class="btnSelec">M</button> <button data-id="${Position.id}" id="eliminar" class="btnSelec">X</button></td>
                     </tr>
                     `
                 }).join("")}
@@ -74,7 +77,7 @@ export default {
             registro.className += " active";
             agregar.classList.remove("active");
 
-            this.DeleteAreas();
+            this.DeletePosition();
             this.showUpdate();
             this.showForm();
             
@@ -82,23 +85,23 @@ export default {
     },
 
     showForm(){
-        let registro = document.querySelector(".registroAreas");
-        let agregar = document.querySelector("#agregarAreas");
+        let registro = document.querySelector(".registroPosition");
+        let agregar = document.querySelector("#agregarPosition");
 
         agregar.addEventListener("click",(e)=>{
-          this.showAreas();
+          this.showPosition();
         agregar.className += " active";
         registro.classList.remove("active");
         })
     },
 
-    DeleteAreas(){
+    DeletePosition(){
         let btnDelete = document.querySelectorAll("#eliminar");
         btnDelete.forEach((val,id) => {
             val.addEventListener("click", async (e)=>{
                 console.log(val.dataset.id);
                 let data =val.dataset.id;
-                let res = await ApiAreas.deleteAreas(data);
+                let res = await ApiPosition.deletePosition(data);
                alert(res);
                 window.location.reload();
             })
@@ -110,19 +113,23 @@ export default {
         btnUpdate.forEach((val,id) => {
             console.log(val);
             val.addEventListener("click", async (e)=>{
-                let idarea = val.dataset.id;
-                let areaUpdate = await ApiAreas.getAreasId(idarea);
-                console.log(areaUpdate);
+                let idPosition = val.dataset.id;
+                let PositionUpdate = await ApiPosition.getPositionId(idPosition);
+                console.log(PositionUpdate);
                document.querySelector(".containerForm").innerHTML =  `
-               <h1 class="text-center">Modificar Areas</h1>
+               <h1 class="text-center">Modificar Position</h1>
             <form class="formTables" id="newForm">
             <div class="row">
-            <div class="col-12 d-flex flex-column justify-content-center mb-3">
-                <label for="">Ingrese la nueva area</label>
-                <input class="form-control" value="${areaUpdate.MESSAGE[0].nombreArea}" type="text" name="name_area" required placeholder="Nombre area">
+            <div class="col-12 d-flex flex-column justify-content-center mb-2">
+                <label for="">Nombre Posicion</label>
+                <input class="form-control" value="${PositionUpdate.MESSAGE[0].name_position}" type="text" name="name_position" required placeholder="Nombre Position">
             </div>
+            <div class="col-12 d-flex flex-column justify-content-center mb-3">
+            <label for="">ALR</label>
+            <input class="form-control" value="${PositionUpdate.MESSAGE[0].arl}" type="text" name="arl" required placeholder="">
+        </div>
             <div class="col-12 d-flex justify-content-center">
-                <button id="${idarea}" class="btnSub fs-4" type="submit"> Modificar </button>
+                <button id="${idPosition}" class="btnSub fs-4" type="submit"> Modificar </button>
             </div>
             </div>  
             </form>`;
@@ -139,8 +146,8 @@ export default {
         let id = btnSub.id;
         console.log(id);
         let data = Object.fromEntries(new FormData(e.target));
-        data.name_area = data.name_area.toLocaleUpperCase();
-        let res = await ApiAreas.updateAreas(data, id);
+
+        let res = await ApiPosition.updatePosition(data, id);
         alert(res);
         newForm.reset();
         window.location.reload();

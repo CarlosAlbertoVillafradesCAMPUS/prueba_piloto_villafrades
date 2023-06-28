@@ -28,9 +28,9 @@ USE campusland;
 
 DESCRIBE routes;
 SELECT * FROM regions INNER JOIN countries ON countries.id = regions.id_country;
-
+INSERT INTO countries(name_country) VALUES ("BRA");
 SELECT cities.id AS codeCity, name_city AS nombreCity, regions.id AS codeRegion, name_region AS nombreRegion FROM cities INNER JOIN regions ON cities.id_region = regions.id;
-SELECT * FROM staff;
+SELECT * FROM countries;
 SELECT id AS "code", name_country AS "name" FROM countries;
 SELECT cities.id AS codeCity, name_city AS nombreCity, regions.id AS codeRegion, name_region AS nombreRegion, countries.id AS codeCountry, name_country AS nombreCountry FROM cities INNER JOIN regions ON cities.id_region = regions.id INNER JOIN countries ON regions.id_country = countries.id;
 DELETE FROM countries;
@@ -47,3 +47,5 @@ SELECT regions.id AS codeRegion, name_region AS nombreRegion, countries.id AS co
 SELECT cities.id AS codeCity, name_city AS nombreCity, regions.id AS codeRegion, name_region AS nombreRegion FROM cities INNER JOIN regions ON cities.id_region = regions.id;
 SELECT id AS "code", name_area AS "nombreArea" FROM areas;
 SELECT staff.id AS id, doc AS cc, first_name AS name_first, second_name AS name_second, first_surname AS surname_first, second_surname AS surname_second, eps, cities.id AS city_code, name_city AS city_name, areas.id AS area_code, name_area AS area_name FROM staff INNER JOIN cities ON staff.id_city = cities.id INNER JOIN areas ON staff.id_area = areas.id;
+SELECT contact_info.*, staff.id, staff.doc, staff.first_name, staff.first_surname FROM contact_info INNER JOIN staff ON contact_info.id_staff = staff.id;
+SELECT admin_area.id, areas.id AS "id_areas", areas.name_area, staff.id AS "id_staff", staff.doc, staff.first_name, staff.second_name, staff.first_surname, position.id AS "id_position", position.name_position, position.arl, journey.id AS "id_journey", journey.name_journey, journey.check_in, journey.check_out FROM admin_area INNER JOIN areas ON admin_area.id_area = areas.id INNER JOIN staff ON admin_area.id_staff = staff.id INNER JOIN position ON admin_area.id_position = position.id INNER JOIN journey ON admin_area.id_journey = journey.id;

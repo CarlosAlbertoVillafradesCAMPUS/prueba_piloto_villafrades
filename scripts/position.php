@@ -1,19 +1,21 @@
 <?php
+namespace App;
     class position extends connect{
         use getInstance;
         private $message;
-        private $queryPostPosition = 'INSERT INTO position (name_position, arl) VALUES (:name_position, :arl_name)';
+        private $queryPostPosition = 'INSERT INTO position (name_position, arl) VALUES (:name_position, :arl)';
         private $queryGetPosition = 'SELECT * FROM position';
+        private $queryGetPositionId = 'SELECT * FROM position WHERE id = :id';
         private $queryUpdatePosition = 'UPDATE position SET name_position = :name_position, arl = :arl WHERE id = :id_position';
         private $queryDeletePosition = 'DELETE FROM position WHERE id = :id_position';
 
-        public function __construct(public $name_position, public $arl_name){parent::__construct();}
+        public function __construct(public $name_position=1, public $arl=1){parent::__construct();}
 
         public function postPosition(){
             try {
                 $res = $this->__get("conex")->prepare($this->queryPostPosition);
                 $res->bindValue("name_position", $this->name_position);
-                $res->bindValue("arl_name", $this->arl_name);
+                $res->bindValue("arl", $this->arl);
                 $res->execute();
                 $this->message = ["STATUS" => 200, "MESSAGE" => "Add Succesfull"];
 
@@ -29,13 +31,28 @@
             try {
                 $res = $this->__get("conex")->prepare($this->queryGetPosition);
                 $res->execute();
-                $this->message = ["STATUS" => 200, "MESSAGE" => $res->fetchAll(PDO::FETCH_ASSOC)];
+                $this->message = ["STATUS" => 200, "MESSAGE" => $res->fetchAll(\PDO::FETCH_ASSOC)];
 
             } catch (\PDOException $error) {
                 $this->message = $error->getMessage();
                 
             } finally {
-                print_r($this->message);
+                return $this->message;
+            }
+        }
+
+        public function getPositionId($code){
+            try {
+                $res = $this->__get("conex")->prepare($this->queryGetPositionId);
+                $res->bindValue("id", $code);
+                $res->execute();
+                $this->message = ["STATUS" => 200, "MESSAGE" => $res->fetchAll(\PDO::FETCH_ASSOC)];
+
+            } catch (\PDOException $error) {
+                $this->message = $error->getMessage();
+                
+            } finally {
+                return $this->message;
             }
         }
 
@@ -43,7 +60,7 @@
             try {
                 $res = $this->__get("conex")->prepare($this->queryUpdatePosition);
                 $res->bindValue("name_position", $this->name_position);
-                $res->bindValue("arl", $this->arl_name);
+                $res->bindValue("arl", $this->arl);
                 $res->bindValue("id_position", $id_position);
                 $res->execute();
                 $this->message = ["STATUS" => 200, "MESSAGE" => "Update Succesfull"];

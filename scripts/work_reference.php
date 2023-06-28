@@ -1,13 +1,15 @@
 <?php
+namespace App;
 class work_reference extends connect{
     use getInstance;
     private $message;
     private $queryPost = 'INSERT INTO work_reference(full_name, cel_number, position, company) VALUES (:name, :number_tel, :posit, :compan)';
     private $queryGet = 'SELECT * FROM work_reference';
+    private $queryGetId = 'SELECT * FROM work_reference WHERE id = :id';
     private $queryPut = 'UPDATE work_reference SET full_name = :newName, cel_number = :newCelNumbre, position = :newPosition, company = :newCompany WHERE id = :code';
     private $queryDelete = 'DELETE FROM work_reference WHERE id = :id';
 
-    public function __construct(public $full_name, private $cel_number, public $position, public $company){parent::__construct();}
+    public function __construct(public $full_name=1, private $cel_number=1, public $position=1, public $company=1){parent::__construct();}
 
     public function workReferencePost(){
         try {
@@ -30,11 +32,24 @@ class work_reference extends connect{
         try {
             $res = $this->__get("conex")->prepare($this->queryGet);
             $res->execute();
-            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(PDO::FETCH_ASSOC)];
+            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
             $this->message = $e->getMessage();
         } finally{
-            print_r($this->message);
+            return $this->message;
+        }
+    }
+
+    public function workReferenceGetId($code){
+        try {
+            $res = $this->__get("conex")->prepare($this->queryGetId);
+            $res->bindValue("id", $code);
+            $res->execute();
+            $this->message = ["STATUS"=>200,"MESSAGE"=>$res->fetchAll(\PDO::FETCH_ASSOC)];
+        } catch (\PDOException $e) {
+            $this->message = $e->getMessage();
+        } finally{
+            return $this->message;
         }
     }
 

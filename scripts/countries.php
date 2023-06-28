@@ -32,8 +32,6 @@ class countries extends connect{
         } else{
             print_r(["STATUS"=>200,"MESSAGE"=>"Error!!, $name_country ya se encuentra registrado"]);
         }
-
-       
     }
 
     public function countryGetAll(){

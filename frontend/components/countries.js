@@ -69,7 +69,7 @@ export default {
                     <input type="text" name="name_country" required placeholder="Nombre del pais">
                     <button type="submit"> Agregar </button>
                 </form>
-            </div`;
+            </div>`;
         agregar.className += " active";
         registro.classList.remove("active");
         this.agregarCountry();

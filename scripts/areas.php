@@ -10,18 +10,29 @@ class areas extends connect{
     private $queryDelete = 'DELETE FROM areas WHERE id = :id_area';
 
 
-    public function __construct(public $name_area=1){parent::__construct();}
+    public function __construct(public $name_area="1"){parent::__construct();}
 
     public function areasPost(){
-        try {
-            $res = $this->__get("conex")->prepare($this->queryPost);
-            $res->bindValue("name", $this->name_area);
-            $res->execute();
-            $this->message = ["STATUS"=>200,"MESSAGE"=>"Add Succesfull"];
-        } catch (\PDOException $e) {
-            $this->message = $e->getMessage();
-        } finally{
-            print_r($this->message);
+        $myData = $this->areasGet();
+        $myData = array_values($myData["MESSAGE"]);
+        $newArray = (array)[];
+        foreach ($myData as $value) {
+            array_push( $newArray, $value["nombreArea"]);
+        }
+        if (!in_array($this->name_area, $newArray)) {
+            try {
+                $res = $this->__get("conex")->prepare($this->queryPost);
+                $res->bindValue("name", $this->name_area);
+                $res->execute();
+                $this->message = ["STATUS"=>200,"MESSAGE"=>"Add Succesfull"];
+                
+             } catch (\PDOException $e) {
+                $this->message = $e->getMessage();
+             } finally{
+                print_r($this->message);
+             }
+        } else{
+            print_r(["STATUS"=>200,"MESSAGE"=>"Error!!, ".$this->name_area." ya se encuentra registrado"]);
         }
         
     }

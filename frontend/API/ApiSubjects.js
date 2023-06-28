@@ -1,51 +1,51 @@
 export default {
-    async getStaff(){
+    async getSubjects(){
         let config = {
             method: "GET",
             header: {"Content-Type": "application/json"},
         }
 
-        let data = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/staff", config)).json();
+        let data = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/subjects", config)).json();
         return data;
     },
 
-    async getStaffId(id){
+    async getSubjectsId(id){
         let config = {
             method: "GET",
             header: {"Content-Type": "application/json"},
         }
 
-        let data = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/staff/${id}`, config)).json();
+        let data = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/subjects/${id}`, config)).json();
         return data;
     },
 
-    async postStaff(data){
+    async postSubjects(data){
         let config = {
             method: "POST",
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
-        let res = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/staff", config)).text();
+        let res = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/subjects", config)).text();
         return res;
     },
 
-    async updateStaff(data, id){
+    async updateSubjects(data, id){
         let config = {
             method: "PUT",
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
-        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/staff/${id}`, config)).text();
+        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/subjects/${id}`, config)).text();
         return res;
     },
 
-    async deleteStaff(id){
+    async deleteSubjects(id){
         let config = {
             method: "DELETE",
             header: {"Content-Type": "application/json"},
         }
 
-        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/staff/${id}`, config)).text();
+        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/subjects/${id}`, config)).text();
         return res;
     }
 }
