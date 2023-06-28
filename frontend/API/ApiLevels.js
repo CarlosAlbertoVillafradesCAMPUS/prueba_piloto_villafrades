@@ -6,7 +6,7 @@ export default {
         }
         console.log("yeaaa");
         
-        let data = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/levels", config)).json();
+        let data = await (await fetch("http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/levels", config)).json();
         return data;
     },
 
@@ -16,7 +16,7 @@ export default {
             header: {"Content-Type": "application/json"},
         }
 
-        let data = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/levels/${id}`, config)).json();
+        let data = await (await fetch(`http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/levels/${id}`, config)).json();
         return data;
     },
 
@@ -27,7 +27,7 @@ export default {
             body:JSON.stringify(data)
         }
         console.log("yeaaa");
-        let res = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/levels", config)).text();
+        let res = await (await fetch("http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/levels", config)).text();
         return res;
     },
 
@@ -37,7 +37,7 @@ export default {
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
-        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/levels/${id}`, config)).text();
+        let res = await (await fetch(`http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/levels/${id}`, config)).text();
         return res;
     },
 
@@ -47,7 +47,7 @@ export default {
             header: {"Content-Type": "application/json"},
         }
 
-        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/levels/${id}`, config)).text();
+        let res = await (await fetch(`http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/levels/${id}`, config)).text();
         return res;
     }
 }

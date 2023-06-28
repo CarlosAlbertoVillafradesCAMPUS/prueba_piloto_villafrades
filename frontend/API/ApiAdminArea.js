@@ -5,7 +5,7 @@ export default {
             header: {"Content-Type": "application/json"},
         }
 
-        let data = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/adminArea", config)).json();
+        let data = await (await fetch("http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/adminArea", config)).json();
         return data;
     },
 
@@ -15,7 +15,7 @@ export default {
             header: {"Content-Type": "application/json"},
         }
 
-        let data = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/adminArea/${id}`, config)).json();
+        let data = await (await fetch(`http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/adminArea/${id}`, config)).json();
         return data;
     },
 
@@ -25,7 +25,7 @@ export default {
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
-        let res = await (await fetch("http://localhost/prueba_piloto_villafrades/uploads/adminArea", config)).text();
+        let res = await (await fetch("http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/adminArea", config)).text();
         return res;
     },
 
@@ -35,7 +35,7 @@ export default {
             header: {"Content-Type": "application/json"},
             body:JSON.stringify(data)
         }
-        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/adminArea/${id}`, config)).text();
+        let res = await (await fetch(`http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/adminArea/${id}`, config)).text();
         return res;
     },
 
@@ -45,7 +45,7 @@ export default {
             header: {"Content-Type": "application/json"},
         }
 
-        let res = await (await fetch(`http://localhost/prueba_piloto_villafrades/uploads/adminArea/${id}`, config)).text();
+        let res = await (await fetch(`http://localhost/SkylAb-116/prueba_piloto_villafrades/uploads/adminArea/${id}`, config)).text();
         return res;
     }
 }

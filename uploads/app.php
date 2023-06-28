@@ -6,6 +6,7 @@ require_once "../vendor/autoload.php";
 $router = new \Bramus\Router\Router();
 
 //COUNTRIES
+
 $router->get("/countries", function(){
     echo json_encode(\App\countries::getInstance()->countryGetAll());
 });
@@ -16,16 +17,15 @@ $router->delete("/countries/{id}", function($id){
     \App\countries::getInstance()->countryDelete($id);
 });
 $router->post("/countries", function(){
-    $_DATA = json_decode(file_get_contents("php://input"), true);
-   \App\countries::getInstance()->countryPost(...$_DATA);
+   \App\countries::getInstance(json_decode(file_get_contents("php://input"), true))->countryPost();
 });
 $router->put("/countries/{id}", function($id){
     $_DATA = json_decode(file_get_contents("php://input"), true);
-   \App\countries::getInstance()->countryUpdate($_DATA, $id);
+   \App\countries::getInstance(json_decode(file_get_contents("php://input"), true))->countryUpdate($id);
 });
 
 
-//REGIONS
+///REGIONS
 $router->get("/regions", function(){
     echo json_encode(\App\regions::getInstance()->regionsGet());
 });
@@ -198,7 +198,7 @@ $router->post("/levels", function(){
 $router->put("/levels/{id}", function($id){
    \App\levels::getInstance(json_decode(file_get_contents("php://input"),true))->UpdateLevels($id);
 });
-$router->run();
+
 
 //JOURNEY
 $router->get("/journey", function(){
@@ -211,6 +211,7 @@ $router->delete("/journey/{id}", function($id){
     \App\journey::getInstance()->deleteJourney($id);
 });
 $router->post("/journey", function(){
+    var_dump(json_decode(file_get_contents("php://input"),true));
    \App\journey::getInstance(json_decode(file_get_contents("php://input"),true))->postJourney(); 
 });
 $router->put("/journey/{id}", function($id){
@@ -228,12 +229,13 @@ $router->delete("/position/{id}", function($id){
     \App\position::getInstance()->DeletePosition($id);
 });
 $router->post("/position", function(){
+    var_dump(json_decode(file_get_contents("php://input"),true));
    \App\position::getInstance(json_decode(file_get_contents("php://input"),true))->postPosition(); 
 });
 $router->put("/position/{id}", function($id){
    \App\position::getInstance(json_decode(file_get_contents("php://input"),true))->UpdatePosition($id);
 });
-
+ 
 //ADMIN AREA
 $router->get("/adminArea", function(){
     echo json_encode(\App\admin_area::getInstance()->getAdminArea());
@@ -245,7 +247,8 @@ $router->delete("/adminArea/{id}", function($id){
     \App\admin_area::getInstance()->deleteAdminArea($id);
 });
 $router->post("/adminArea", function(){
-   \App\admin_area::getInstance(json_decode(file_get_contents("php://input"),true))->postAdminArea(); 
+    var_dump(json_decode(file_get_contents("php://input"),true));
+   \App\admin_area::getInstance(json_decode(file_get_contents("php://input"),true))->postadminArea(); 
 });
 $router->put("/adminArea/{id}", function($id){
    \App\admin_area::getInstance(json_decode(file_get_contents("php://input"),true))->updateAdminArea($id);
@@ -263,11 +266,13 @@ $router->delete("/academicArea/{id}", function($id){
     \App\academic_area::getInstance()->deleteAcademicArea($id);
 });
 $router->post("/academicArea", function(){
+    var_dump(json_decode(file_get_contents("php://input"),true));
    \App\academic_area::getInstance(json_decode(file_get_contents("php://input"),true))->postAcademicArea(); 
 });
 $router->put("/academicArea/{id}", function($id){
    \App\academic_area::getInstance(json_decode(file_get_contents("php://input"),true))->updateAcademicArea($id);
 });
+
 
 
 //MAINT AREA
@@ -321,7 +326,8 @@ $router->post("/subjects", function(){
 });
 $router->put("/subjects/{id}", function($id){
    \App\subjects::getInstance(json_decode(file_get_contents("php://input"),true))->UpdateSubjects($id);
-});
+}); 
+
 $router->run();
 
     

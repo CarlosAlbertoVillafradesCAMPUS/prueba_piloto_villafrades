@@ -8,19 +8,19 @@ class countries extends connect{
     private $queryGetId = 'SELECT id AS "code", name_country AS "name" FROM countries WHERE id = :code';
     private $queryPut = 'UPDATE countries SET name_country = :value WHERE id = :code';
     private $queryDelete = 'DELETE FROM countries WHERE id = :id';
-    public function __construct(){parent::__construct();}
+    public function __construct(public $name_country=1){parent::__construct();}
 
-    public function countryPost($name_country){
+    public function countryPost(){
         $myData = $this->countryGetAll();
         $myData = array_values($myData["MESSAGE"]);
         $newArray = (array)[];
         foreach ($myData as $value) {
             array_push( $newArray, $value["name"]);
         }
-        if (!in_array($name_country, $newArray)) {
+        if (!in_array($this->name_country, $newArray)) {
             try {
                 $res = $this->__get("conex")->prepare($this->queryPost);
-                $res->bindValue("name", $name_country);
+                $res->bindValue("name", $this->name_country);
                 $res->execute();
                 $this->message = ["STATUS"=>200,"MESSAGE"=>"Add Succesfull"];
                 
@@ -30,7 +30,7 @@ class countries extends connect{
                 print_r($this->message);
              }
         } else{
-            print_r(["STATUS"=>200,"MESSAGE"=>"Error!!, $name_country ya se encuentra registrado"]);
+            print_r(["STATUS"=>200,"MESSAGE"=>"Error!!,". $this->name_country . "ya se encuentra registrado"]);
         }
     }
 
@@ -59,18 +59,17 @@ class countries extends connect{
         }
     }
 
-    public function countryUpdate($name_country, $code){
-        $name_country = $name_country["name_country"];
+    public function countryUpdate($code){
         $myData = $this->countryGetAll();
         $myData = array_values($myData["MESSAGE"]);
         $newArray = (array)[];
         foreach ($myData as $value) {
             array_push($newArray, $value["name"]);
         }
-        if (!in_array($name_country, $newArray)) {
+        if (!in_array($this->name_country, $newArray)) {
             try {
                 $res = $this->__get("conex")->prepare($this->queryPut);
-                $res->bindValue("value", $name_country);
+                $res->bindValue("value", $this->name_country);
                 $res->bindValue("code", $code);
                 $res->execute();
                 $this->message = ["STATUS"=>200,"MESSAGE"=>"Update Succesfull"];
@@ -81,7 +80,7 @@ class countries extends connect{
                 print_r($this->message);
              }
         } else{
-            print_r(["STATUS"=>200,"MESSAGE"=>"Error!!, $name_country ya se encuentra registrado"]);
+            print_r(["STATUS"=>200,"MESSAGE"=>"Error!!,". $this->name_country. "ya se encuentra registrado"]);
         }
     }
     public function countryDelete($code){
